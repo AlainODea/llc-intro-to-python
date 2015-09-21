@@ -836,11 +836,10 @@
         Let's look at the example below to see how to open these files in Python and print the contents to the screen.
 
         ```python
-        >>> chapters = open('./exercises/llc-chapters.csv')
-        >>> print(chapters.read())
+        >>> with open('./exercises/llc-chapters.csv') as chapters:
+        ...     print(chapters.read())
+        ...
         # ... lots of file data ...
-        >>> chapters.close()
-        # When you're done with a file it's a good idea to close it
         ```
       </script>
     </section>
@@ -856,17 +855,16 @@
         Let&rsquo;s try printing out a few individual lines.
 
         ```python
-        >>> chapters = open('./exercises/llc-chapters.csv')
-        >>> print(chapters.readline())
+        >>> with open('./exercises/llc-chapters.csv') as chapters:
+        ...     print(chapters.readline())
+        ...     print(chapters.readline())
+        ...     print(chapters.readline())
+        ...
         City,Province,Chapter Lead(s)
 
-        >>> print(chapters.readline())
         Vancouver,BC,Meghan
 
-        >>> print(chapters.readline())
         Calgary,AB,Darcie
-
-        >>> chapters.close()
         ```
       </script>
     </section>
@@ -903,11 +901,10 @@
         Here's some sample code:
 
         ```python
-        >>> chapters = open('./exercises/llc-chapters.csv')
-        >>> for line in chapters:
-        ...     print(line)
+        >>> with open('./exercises/llc-chapters.csv') as chapters:
+        ...    for line in chapters:
+        ...       print(line)
         ...
-        >>> chapters.close()
         ```
 
         More info: https://docs.python.org/2/tutorial/controlflow.html#for-statements
@@ -995,17 +992,18 @@
         1. import the `csv` library
         1. open the file
         1. pass the file into `DictReader`
+        1. set the first row into a `chapter` variable
 
         ```
         >>> import csv
-        >>> chapters_file = open('./exercises/llc-chapters.csv')
-        >>> chapters_data = csv.DictReader(chapters_file)
+        >>> with open('./exercises/llc-chapters.csv') as chapters_file:
+        ...     chapters_data = csv.DictReader(chapters_file)
+        ...     chapter = chapters_data.next()
         ```
 
-        Now, we can pull out one row at a time.
+        Now, we can look at that chapter.
 
         ```
-        >>> chapter = chapters_data.next()
         >>> print(chapter)
         {'City': 'Vancouver', 'Chapter Lead(s)': 'Meghan', 'Province': 'BC'}
         >>> type(chapter)
@@ -1046,11 +1044,11 @@
 
         ```python
         >>> import csv
-        >>> chapters_file = open('./exercises/llc-chapters.csv')
-        >>> chapters = csv.DictReader(chapters_file)
-        >>> for chapter in chapters:
-        ...     print(chapter['City'] + ', ' + chapter['Province'])
-        ...     print('    ' + chapter['Chapter Lead(s)'])
+        >>> with open('./exercises/llc-chapters.csv') as chapters_file:
+        ...    chapters = csv.DictReader(chapters_file)
+        ...    for chapter in chapters:
+        ...       print(chapter['City'] + ', ' + chapter['Province'])
+        ...       print('    ' + chapter['Chapter Lead(s)'])
         ...
         Vancouver, BC
             Meghan
@@ -1075,13 +1073,13 @@
 
         # Open the 'llc-chapters.csv' file
 
-        # Convert it to a csv_data structure
+           # Convert it to a csv_data structure
 
-        # Loop through each of the rows
+           # Loop through each of the rows
 
-            # Compare the 'City' in the row with your city
+              # Compare the 'City' in the row with your city
 
-                # Print "Thank you [[Chapter Lead(s)]]!"
+                 # Print "Thank you [[Chapter Lead(s)]]!"
         ```
       </script>
     </section>
@@ -1108,14 +1106,14 @@
         # file: exercises/demo_loop_count.py
         import csv
 
-        csv_file = open('llc-chapters.csv')
-        csv_data = csv.DictReader(csv_file)
+        with open('llc-chapters.csv') as csv_file:
+           csv_data = csv.DictReader(csv_file)
 
-        count = 0
-        for row in csv_data:
-            count += 1
+           count = 0
+           for row in csv_data:
+              count += 1
 
-        print("There are " + str(count) + " chapters")
+           print("There are " + str(count) + " chapters")
         ```
       </script>
     </section>

@@ -78,28 +78,26 @@ def national_girls_code(reader):
 
 
 def main(filename):
-    workshop_file = open(filename)
+    with open(filename) as workshop_file:
 
-    reader = csv.DictReader(workshop_file)
+        reader = csv.DictReader(workshop_file)
 
-    attendees_in_city("Vancouver", reader)
+        attendees_in_city("Vancouver", reader)
 
-    workshop_file.seek(0)
-    youth_event_attendees(reader)
+        workshop_file.seek(0)
+        youth_event_attendees(reader)
 
-    workshop_file.seek(0)
-    py_ruby_workshops(reader)
+        workshop_file.seek(0)
+        py_ruby_workshops(reader)
 
-    workshop_file.seek(0)
-    volunteers(reader)
+        workshop_file.seek(0)
+        volunteers(reader)
 
-    workshop_file.seek(0)
-    national_learn_code(reader)
+        workshop_file.seek(0)
+        national_learn_code(reader)
 
-    workshop_file.seek(0)
-    national_girls_code(reader)
-
-    workshop_file.close()
+        workshop_file.seek(0)
+        national_girls_code(reader)
 
 if __name__ == '__main__':
     main('llc-workshop-data.csv')

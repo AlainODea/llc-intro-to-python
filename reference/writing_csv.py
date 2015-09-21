@@ -8,22 +8,19 @@
 import csv
 
 # By default, open assumes you're reading a file
-workshops_file = open('../exercises/llc-workshop-data.csv')
-workshops_data = csv.DictReader(workshops_file)
+with open('../exercises/llc-workshop-data.csv') as workshops_file:
+    workshops_data = csv.DictReader(workshops_file)
 
-# open takes a second 'mode' argument that allows you to get a file ready to 'write in binary mode' so we can output
-filtered_file = open('filtered.csv', 'wb')
-# Note: We're reading the fieldnames from the llc-workshop-data.csv so the DictWriter knows what to write to the file
-filtered_writer = csv.DictWriter(filtered_file, workshops_data.fieldnames)
+    # open takes a second 'mode' argument that allows you to get a file ready to 'write in binary mode' so we can output
+    with open('filtered.csv', 'wb') as filtered_file:
+        # Note: We're reading the fieldnames from the llc-workshop-data.csv so the DictWriter knows what to write to the file
+        filtered_writer = csv.DictWriter(filtered_file, workshops_data.fieldnames)
 
-# Write the headers first so we know what data we're putting into the filtered.csv
-filtered_writer.writeheader()
+        # Write the headers first so we know what data we're putting into the filtered.csv
+        filtered_writer.writeheader()
 
-for participant in workshops_data:
-    event_name = participant['Event Name']
-    if event_name.find('National Learn to Code Day') >= 0:
-        # We're writing only the National Learn to Code Day participants to the new filtered file
-        filtered_writer.writerow(participant)
-
-filtered_file.close()
-workshops_file.close()
+        for participant in workshops_data:
+            event_name = participant['Event Name']
+            if event_name.find('National Learn to Code Day') >= 0:
+                # We're writing only the National Learn to Code Day participants to the new filtered file
+                filtered_writer.writerow(participant)

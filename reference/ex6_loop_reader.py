@@ -11,19 +11,17 @@ We can use a variable to count the number of loops, and that will give us the to
 
 import csv
 
-chapters_file = open('../exercises/llc-chapters.csv')
+with open('../exercises/llc-chapters.csv') as chapters_file:
 
-reader = csv.DictReader(chapters_file)
+    reader = csv.DictReader(chapters_file)
 
-count = 0
-for row in reader:
-    print(row)
-    #
-    # += is the same are writing `count = count + 1`
-    #
-    count += 1
+    count = 0
+    for row in reader:
+        print(row)
+        #
+        # += is the same are writing `count = count + 1`
+        #
+        count += 1
 
-print(count)
-# 16
-
-chapters_file.close()
+    print(count)
+    # 16

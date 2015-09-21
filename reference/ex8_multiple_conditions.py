@@ -9,20 +9,18 @@ In order to count all these events, we'll need to use the boolean `or` operator 
 
 import csv
 
-workshop_file = open('../exercises/llc-workshop-data.csv')
+with open('../exercises/llc-workshop-data.csv') as workshop_file:
 
-reader = csv.DictReader(workshop_file)
+    reader = csv.DictReader(workshop_file)
 
-#
-# We can find either term if we combine the searches with `or`
-#
-count = 0
-for row in reader:
-    name = row['Event Name']
-    if name.find('Kids Learning Code') >= 0 or name.find('Girls Leaning Code') >= 0:
-        count += 1
+    #
+    # We can find either term if we combine the searches with `or`
+    #
+    count = 0
+    for row in reader:
+        name = row['Event Name']
+        if name.find('Kids Learning Code') >= 0 or name.find('Girls Leaning Code') >= 0:
+            count += 1
 
-print(count)
-# 609
-
-workshop_file.close()
+    print(count)
+    # 609
